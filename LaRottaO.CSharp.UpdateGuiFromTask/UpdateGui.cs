@@ -22,6 +22,29 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             //not implemented
         }
 
+        public static void setClipboardText(String argText)
+        {
+            Thread thread = new Thread((ThreadStart)delegate
+           {
+               Clipboard.SetText(argText);
+           });
+
+            try
+            {
+                thread.TrySetApartmentState(ApartmentState.STA);
+                thread.Start();
+
+                while (!thread.IsAlive) { Thread.Sleep(1); }
+
+                Thread.Sleep(1);
+                thread.Join();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to set text on clipboard: " + ex.ToString());
+            }
+        }
+
         public static void listboxAddItem(ListBox listBox, String argText, Boolean useTimestamp)
         {
             String timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
