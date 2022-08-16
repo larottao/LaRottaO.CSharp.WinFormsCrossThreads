@@ -24,6 +24,11 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
 
         public static void setClipboardText(String argText)
         {
+            if (argText == null)
+            {
+                return;
+            }
+
             Thread thread = new Thread((ThreadStart)delegate
            {
                Clipboard.SetText(argText);
@@ -47,18 +52,19 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
 
         public static void listboxAddItem(ListBox listBox, String argText, Boolean useTimestamp)
         {
-            String timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            if (useTimestamp)
-            {
-                argText = timeStamp + ": " + argText;
-            }
-
             if (Thread.CurrentThread.IsBackground)
             {
                 listBox.Invoke(new Action(() =>
                 {
-                    listBox.Items.Add(argText);
+                    if (useTimestamp)
+                    {
+                        listBox.Items.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ": " + argText);
+                    }
+                    else
+                    {
+                        listBox.Items.Add(argText);
+                    }
+
                     listBox.SelectedIndex = listBox.Items.Count - 1;
                 }));
             }
@@ -99,13 +105,20 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void textBoxAppendText(TextBox textBox, String argText)
+        public static void textBoxAppendText(TextBox textBox, String argText, Boolean useTimeStamp = false)
         {
             if (Thread.CurrentThread.IsBackground)
             {
                 textBox.Invoke(new Action(() =>
                 {
-                    textBox.AppendText(argText);
+                    if (useTimeStamp)
+                    {
+                        textBox.AppendText(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ": " + argText + Environment.NewLine);
+                    }
+                    else
+                    {
+                        textBox.AppendText(argText);
+                    }
                 }));
             }
             else
