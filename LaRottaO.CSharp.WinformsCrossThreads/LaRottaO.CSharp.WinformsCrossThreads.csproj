@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clipboards.cs" />
+    <Compile Include="ComboBoxes.cs" />
+    <Compile Include="ClipboardOps.cs" />
     <Compile Include="ListBoxes.cs" />
     <Compile Include="ProgressBars.cs" />
     <Compile Include="TextBoxes.cs" />
