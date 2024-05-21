@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrossThreadsOps.cs" />
+    <Compile Include="Clipboards.cs" />
+    <Compile Include="ListBoxes.cs" />
+    <Compile Include="ProgressBars.cs" />
+    <Compile Include="TextBoxes.cs" />
+    <Compile Include="DataGridViews.cs" />
+    <Compile Include="CheckBoxes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
