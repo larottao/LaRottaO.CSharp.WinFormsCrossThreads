@@ -8,21 +8,18 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
     ///
     /// Methods for safely updating Windows Forms Controls from a method running on another thread
     ///
-    /// 2021 06 15
+    /// Original: 2021 06 15
+    ///
+    /// Converted to extension method: 2024 05 21
     ///
     /// by Felipe La Rotta
     ///
     /// </summary>
     ///
 
-    public class UpdateGui
+    public static class WinformsCrossThreads
     {
-        private UpdateGui()
-        {
-            //not implemented
-        }
-
-        public static void setClipboardText(String argText)
+        public static void SetClipboardTextFromAnotherThread(String argText)
         {
             if (argText == null)
             {
@@ -50,7 +47,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void listboxAddItem(ListBox listBox, String argText, Boolean useTimestamp)
+        public static void AddItemFromAnotherThread(this ListBox listBox, String argText, Boolean useTimestamp, Boolean setIndexToLast)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -65,17 +62,24 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
                         listBox.Items.Add(argText);
                     }
 
-                    listBox.SelectedIndex = listBox.Items.Count - 1;
+                    if (setIndexToLast)
+                    {
+                        listBox.SelectedIndex = listBox.Items.Count - 1;
+                    }
                 }));
             }
             else
             {
                 listBox.Items.Add(argText);
-                listBox.SelectedIndex = listBox.Items.Count - 1;
+
+                if (setIndexToLast)
+                {
+                    listBox.SelectedIndex = listBox.Items.Count - 1;
+                }
             }
         }
 
-        public static void textBoxSetText(TextBox textBox, String argText)
+        public static void SetTextFromAnotherThread(this TextBox textBox, String argText)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -90,7 +94,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void dataGridViewSetBindingSource(DataGridView dataGridView, BindingSource bindingSource)
+        public static void SetBindingSourceFromAnotherThread(DataGridView dataGridView, BindingSource bindingSource)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -105,7 +109,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void textBoxAppendText(TextBox textBox, String argText, Boolean useTimeStamp = false)
+        public static void AppendTextFromAnotherThread(TextBox textBox, String argText, Boolean useTimeStamp = false)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -127,7 +131,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static int listboxGetSelectedIndex(ListBox listBox)
+        public static int GetSelectedIndexFromAnotherThread(ListBox listBox)
         {
             int selectedIndex = -1;
 
@@ -146,7 +150,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             return selectedIndex;
         }
 
-        public static String listBoxGetText(ListBox listBox)
+        public static String GetTextFromAnotherThread(ListBox listBox)
         {
             String texto = null;
 
@@ -165,7 +169,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             return texto;
         }
 
-        public static void listboxSetSelectedIndex(ListBox listBox, int argIndex)
+        public static void SetSelectedIndexFromAnotherThread(ListBox listBox, int argIndex)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -180,7 +184,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void listboxClearAll(ListBox listBox)
+        public static void ClearFromAnotherThread(ListBox listBox)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -195,7 +199,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void progressBarSetMax(ProgressBar progressBar, int argMaxValue)
+        public static void SetMaxFromAnotherThread(ProgressBar progressBar, int argMaxValue)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -210,7 +214,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void progressBarSetValue(ProgressBar progressBar, int argNewValue)
+        public static void SetValueFromAnotherThread(ProgressBar progressBar, int argNewValue)
         {
             if (Thread.CurrentThread.IsBackground)
             {
