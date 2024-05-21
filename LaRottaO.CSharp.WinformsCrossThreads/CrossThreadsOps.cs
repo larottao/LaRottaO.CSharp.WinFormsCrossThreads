@@ -169,6 +169,25 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             return texto;
         }
 
+        public static Boolean GetCheckedFromAnotherThread(this CheckBox checkBox)
+        {
+            Boolean isChecked = false;
+
+            if (Thread.CurrentThread.IsBackground)
+            {
+                checkBox.Invoke(new Action(() =>
+                {
+                    isChecked = checkBox.Checked;
+                }));
+            }
+            else
+            {
+                isChecked = checkBox.Checked;
+            }
+
+            return isChecked;
+        }
+
         public static void SetSelectedIndexFromAnotherThread(this ListBox listBox, int argIndex)
         {
             if (Thread.CurrentThread.IsBackground)
