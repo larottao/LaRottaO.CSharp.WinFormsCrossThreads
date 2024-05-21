@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
-    public static class Clipboards
+    public static class ClipboardOps
     {
         public static void SetClipboardTextFromAnotherThread(String argText)
         {
@@ -35,7 +35,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static String getClipboardTextFromAnotherThread()
+        public static String GetClipboardTextFromAnotherThread()
         {
             String clipboardText = "";
 
