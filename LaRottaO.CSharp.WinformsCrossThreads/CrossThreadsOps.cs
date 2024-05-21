@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -106,6 +107,55 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             else
             {
                 dataGridView.DataSource = bindingSource;
+            }
+        }
+
+        public static int GetSelectedIndexFromAnotherThread(this DataGridView dataGridView)
+        {
+            int index = 0;
+
+            if (Thread.CurrentThread.IsBackground)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    index = dataGridView.SelectedRows[0].Index;
+                }));
+            }
+            else
+            {
+                index = dataGridView.SelectedRows[0].Index;
+            }
+
+            return index;
+        }
+
+        public static void Refresh(this DataGridView dataGridView)
+        {
+            if (Thread.CurrentThread.IsBackground)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    dataGridView.Refresh();
+                }));
+            }
+            else
+            {
+                dataGridView.Refresh();
+            }
+        }
+
+        public static void SetFirstDesplayedScrollingRowIndexFromAnotherThread(this DataGridView dataGridView, int index)
+        {
+            if (Thread.CurrentThread.IsBackground)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    dataGridView.FirstDisplayedScrollingRowIndex = 1;
+                }));
+            }
+            else
+            {
+                dataGridView.FirstDisplayedScrollingRowIndex = 1;
             }
         }
 
