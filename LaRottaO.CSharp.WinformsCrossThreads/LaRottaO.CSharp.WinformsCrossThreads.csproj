@@ -7,11 +7,12 @@
     <ProjectGuid>{6131451D-BEBD-4A4B-9DDB-3697E5213F31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LaRottaO.CSharp.UpdateGuiFromTask</RootNamespace>
-    <AssemblyName>LaRottaO.CSharp.UpdateGuiFromTask</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>LaRottaO.CSharp.WinFormsCrossThreads</RootNamespace>
+    <AssemblyName>LaRottaO.CSharp.WinFormsCrossThreads</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

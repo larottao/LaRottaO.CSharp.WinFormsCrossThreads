@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LaRottaO.Csharp.UpdateGuiFromTask
+namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
     /// <summary>
     ///
@@ -17,7 +17,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
     /// </summary>
     ///
 
-    public static class WinformsCrossThreads
+    public static class WinFormsCrossThreads
     {
         public static void SetClipboardTextFromAnotherThread(String argText)
         {
@@ -94,7 +94,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void SetBindingSourceFromAnotherThread(DataGridView dataGridView, BindingSource bindingSource)
+        public static void SetBindingSourceFromAnotherThread(this DataGridView dataGridView, BindingSource bindingSource)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -109,7 +109,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void AppendTextFromAnotherThread(TextBox textBox, String argText, Boolean useTimeStamp = false)
+        public static void AppendTextFromAnotherThread(this TextBox textBox, String argText, Boolean useTimeStamp = false)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -131,7 +131,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static int GetSelectedIndexFromAnotherThread(ListBox listBox)
+        public static int GetSelectedIndexFromAnotherThread(this ListBox listBox)
         {
             int selectedIndex = -1;
 
@@ -150,7 +150,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             return selectedIndex;
         }
 
-        public static String GetTextFromAnotherThread(ListBox listBox)
+        public static String GetTextFromAnotherThread(this ListBox listBox)
         {
             String texto = null;
 
@@ -169,7 +169,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             return texto;
         }
 
-        public static void SetSelectedIndexFromAnotherThread(ListBox listBox, int argIndex)
+        public static void SetSelectedIndexFromAnotherThread(this ListBox listBox, int argIndex)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -184,7 +184,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void ClearFromAnotherThread(ListBox listBox)
+        public static void ClearFromAnotherThread(this ListBox listBox)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -199,7 +199,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void SetMaxFromAnotherThread(ProgressBar progressBar, int argMaxValue)
+        public static void SetMaxFromAnotherThread(this ProgressBar progressBar, int argMaxValue)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -214,7 +214,7 @@ namespace LaRottaO.Csharp.UpdateGuiFromTask
             }
         }
 
-        public static void SetValueFromAnotherThread(ProgressBar progressBar, int argNewValue)
+        public static void SetValueFromAnotherThread(this ProgressBar progressBar, int argNewValue)
         {
             if (Thread.CurrentThread.IsBackground)
             {

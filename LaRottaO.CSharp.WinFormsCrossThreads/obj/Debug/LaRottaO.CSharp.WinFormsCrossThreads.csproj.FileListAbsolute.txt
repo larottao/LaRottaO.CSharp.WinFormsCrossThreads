@@ -1,0 +1,6 @@
+C:\Repositorios\LaRottaO.CSharp.WinformsCrossThreads\LaRottaO.CSharp.WinFormsCrossThreads\bin\Debug\LaRottaO.CSharp.WinFormsCrossThreads.dll
+C:\Repositorios\LaRottaO.CSharp.WinformsCrossThreads\LaRottaO.CSharp.WinFormsCrossThreads\bin\Debug\LaRottaO.CSharp.WinFormsCrossThreads.pdb
+C:\Repositorios\LaRottaO.CSharp.WinformsCrossThreads\LaRottaO.CSharp.WinFormsCrossThreads\obj\Debug\LaRottaO.CSharp.WinFormsCrossThreads.csproj.AssemblyReference.cache
+C:\Repositorios\LaRottaO.CSharp.WinformsCrossThreads\LaRottaO.CSharp.WinFormsCrossThreads\obj\Debug\LaRottaO.CSharp.WinFormsCrossThreads.csproj.CoreCompileInputs.cache
+C:\Repositorios\LaRottaO.CSharp.WinformsCrossThreads\LaRottaO.CSharp.WinFormsCrossThreads\obj\Debug\LaRottaO.CSharp.WinFormsCrossThreads.dll
+C:\Repositorios\LaRottaO.CSharp.WinformsCrossThreads\LaRottaO.CSharp.WinFormsCrossThreads\obj\Debug\LaRottaO.CSharp.WinFormsCrossThreads.pdb
