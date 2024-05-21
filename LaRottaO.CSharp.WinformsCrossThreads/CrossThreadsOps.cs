@@ -129,7 +129,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             return index;
         }
 
-        public static void Refresh(this DataGridView dataGridView)
+        public static void RefreshFromAnotherThread(this DataGridView dataGridView)
         {
             if (Thread.CurrentThread.IsBackground)
             {
