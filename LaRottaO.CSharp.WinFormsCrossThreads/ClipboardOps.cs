@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -63,12 +62,20 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
+        //TODO TRY
         public static void ClearClipboardFromAnotherThread()
         {
             Thread thread = new Thread((ThreadStart)delegate
+        {
+            try
             {
                 Clipboard.Clear();
-            });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to clear clipboard: " + ex.ToString());
+            }
+        });
 
             try
             {
