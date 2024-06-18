@@ -6,7 +6,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
     public static class ProgressBars
     {
-        public static void SetMaxFromAnotherThread(this ProgressBar progressBar, int argMaxValue)
+        public static void SetMaxThreadSafe(this ProgressBar progressBar, int argMaxValue)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -21,7 +21,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static void SetValueFromAnotherThread(this ProgressBar progressBar, int argNewValue)
+        public static void SetValueThreadSafe(this ProgressBar progressBar, int argNewValue)
         {
             if (Thread.CurrentThread.IsBackground)
             {

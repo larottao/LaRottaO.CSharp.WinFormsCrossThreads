@@ -6,7 +6,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
     public static class ListBoxes
     {
-        public static void AddItemFromAnotherThread(this ListBox listBox, String argText, Boolean useTimestamp, Boolean setIndexToLast)
+        public static void AddItemThreadSafe(this ListBox listBox, String argText, Boolean useTimestamp, Boolean setIndexToLast)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -38,7 +38,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static int GetSelectedIndexFromAnotherThread(this ListBox listBox)
+        public static int GetSelectedIndexThreadSafe(this ListBox listBox)
         {
             int selectedIndex = -1;
 
@@ -57,7 +57,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             return selectedIndex;
         }
 
-        public static String GetTextFromAnotherThread(this ListBox listBox)
+        public static String GetTextThreadSafe(this ListBox listBox)
         {
             String texto = null;
 
@@ -76,7 +76,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             return texto;
         }
 
-        public static void SetSelectedIndexFromAnotherThread(this ListBox listBox, int argIndex)
+        public static void SetSelectedIndexThreadSafe(this ListBox listBox, int argIndex)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -91,7 +91,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static void ClearFromAnotherThread(this ListBox listBox)
+        public static void ClearThreadSafe(this ListBox listBox)
         {
             if (Thread.CurrentThread.IsBackground)
             {

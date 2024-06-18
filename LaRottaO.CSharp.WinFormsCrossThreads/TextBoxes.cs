@@ -7,7 +7,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
     public static class TextBoxes
 
     {
-        public static void SetTextFromAnotherThread(this TextBox textBox, String argText)
+        public static void SetTextThreadSafe(this TextBox textBox, String argText)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -22,7 +22,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static void AppendTextFromAnotherThread(this TextBox textBox, String argText, Boolean useTimeStamp = false)
+        public static void AppendTextThreadSafe(this TextBox textBox, String argText, Boolean useTimeStamp = false)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -44,7 +44,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static String GetTextFromAnotherThread(this TextBox textBox)
+        public static String GetTextThreadSafe(this TextBox textBox)
         {
             String text = null;
 

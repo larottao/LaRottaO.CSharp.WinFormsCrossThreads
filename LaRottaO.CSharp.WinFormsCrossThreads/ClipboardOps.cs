@@ -6,7 +6,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
     public static class ClipboardOps
     {
-        public static void SetClipboardTextFromAnotherThread(String argText)
+        public static void SetClipboardTextThreadSafe(String argText)
         {
             if (argText == null)
             {
@@ -34,13 +34,20 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static String GetClipboardTextFromAnotherThread()
+        public static String GetClipboardTextThreadSafe()
         {
             String clipboardText = "";
 
             Thread thread = new Thread((ThreadStart)delegate
             {
-                clipboardText = Clipboard.GetText();
+                try
+                {
+                    clipboardText = Clipboard.GetText();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR: {ex}");
+                }
             });
 
             try

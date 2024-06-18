@@ -19,7 +19,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
         /// </summary>
         ///
 
-        public static Boolean GetCheckedFromAnotherThread(this CheckBox checkBox)
+        public static Boolean GetCheckedThreadSafe(this CheckBox checkBox)
         {
             Boolean isChecked = false;
 
@@ -38,7 +38,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             return isChecked;
         }
 
-        public static void SetCheckedFromAnotherThread(this CheckBox checkBox, Boolean value)
+        public static void SetCheckedThreadSafe(this CheckBox checkBox, Boolean value)
         {
             if (Thread.CurrentThread.IsBackground)
             {

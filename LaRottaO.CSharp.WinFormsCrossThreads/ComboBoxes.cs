@@ -6,7 +6,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
     public static class ComboBoxes
     {
-        public static String GetTextFromAnotherThread(this ComboBox comboBox)
+        public static String GetTextThreadSafe(this ComboBox comboBox)
         {
             String text = "";
 
