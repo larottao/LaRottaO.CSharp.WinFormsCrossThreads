@@ -69,7 +69,6 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        //TODO TRY
         public static void ClearClipboardFromAnotherThread()
         {
             Thread thread = new Thread((ThreadStart)delegate

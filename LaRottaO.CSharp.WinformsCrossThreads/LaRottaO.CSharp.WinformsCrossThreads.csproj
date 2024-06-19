@@ -47,6 +47,7 @@
     <Compile Include="ClipboardOps.cs" />
     <Compile Include="ListBoxes.cs" />
     <Compile Include="ProgressBars.cs" />
+    <Compile Include="Labels.cs" />
     <Compile Include="TextBoxes.cs" />
     <Compile Include="DataGridViews.cs" />
     <Compile Include="CheckBoxes.cs" />
