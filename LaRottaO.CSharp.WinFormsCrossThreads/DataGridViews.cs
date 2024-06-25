@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -8,7 +9,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
 {
     public static class DataGridViews
     {
-        public static void SetBindingSourceThreadSafe(this DataGridView dataGridView, BindingSource bindingSource)
+        public static void setBindingSourceThreadSafe(this DataGridView dataGridView, BindingSource bindingSource)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -23,7 +24,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static int GetFirstSelectedRowThreadSafe(this DataGridView dataGridView)
+        public static int getFirstSelectedRowIndexThreadSafe(this DataGridView dataGridView)
         {
             try
             {
@@ -55,7 +56,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static List<int> GetSelectedRowsIndicesThreadSafe(this DataGridView dataGridView)
+        public static List<int> getSelectedRowsIndexesThreadSafe(this DataGridView dataGridView)
         {
             try
             {
@@ -87,11 +88,116 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
+        public static int getSelectedCellsCount(this DataGridView dataGridView)
+        {
+            int count = 0;
+
+            if (Thread.CurrentThread.IsBackground)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    count = dataGridView.SelectedCells.Count;
+                }));
+            }
+            else
+            {
+                count = dataGridView.SelectedCells.Count;
+            }
+
+            return count;
+        }
+
+        public static List<int> getSelectedCellsRowNumberThreadSafe(this DataGridView dataGridView)
+        {
+            List<int> indices = new List<int>();
+
+            if (Thread.CurrentThread.IsBackground)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    for (int counter = 0;
+                        counter < (dataGridView.SelectedCells.Count); counter++)
+                    {
+                        indices.Add(dataGridView.SelectedCells[counter].RowIndex);
+                    }
+                }));
+            }
+            else
+            {
+                for (int counter = 0;
+                    counter < (dataGridView.SelectedCells.Count); counter++)
+                {
+                    indices.Add(dataGridView.SelectedCells[counter].RowIndex);
+                }
+            }
+
+            return indices;
+        }
+
+        public static int getLastSelectedCellRowIndex(this DataGridView dataGridView)
+        {
+            int rowIndex = -1;
+
+            if (Thread.CurrentThread.IsBackground)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    if (dataGridView.SelectedCells.Count > 0)
+                    {
+                        rowIndex = dataGridView.SelectedCells[dataGridView.SelectedCells.Count - 1].RowIndex;
+                    }
+                }));
+            }
+            else
+            {
+                if (dataGridView.SelectedCells.Count > 0)
+                {
+                    rowIndex = dataGridView.SelectedCells[dataGridView.SelectedCells.Count - 1].RowIndex;
+                }
+            }
+
+            return rowIndex;
+        }
+
+        public static List<int> getSelectedCellsColumnNumberThreadSafe(this DataGridView dataGridView)
+        {
+            try
+            {
+                List<int> indices = new List<int>();
+
+                if (Thread.CurrentThread.IsBackground)
+                {
+                    dataGridView.Invoke(new Action(() =>
+                    {
+                        for (int counter = 0;
+                            counter < (dataGridView.SelectedCells.Count); counter++)
+                        {
+                            indices.Add(dataGridView.SelectedCells[counter].ColumnIndex);
+                        }
+                    }));
+                }
+                else
+                {
+                    for (int counter = 0;
+                        counter < (dataGridView.SelectedCells.Count); counter++)
+                    {
+                        indices.Add(dataGridView.SelectedCells[counter].ColumnIndex);
+                    }
+                }
+
+                return indices;
+            }
+            catch
+            {
+                return new List<int>();
+            }
+        }
+
         public static Tuple<Boolean, dynamic> getValueByColHeaderThreadSafe(this DataGridView dataGridView, string HeaderText)
         {
             try
             {
-                int selectedRow = GetFirstSelectedRowThreadSafe(dataGridView);
+                int selectedRow = getFirstSelectedRowIndexThreadSafe(dataGridView);
                 DataGridViewCellCollection dataGridViewCellCollection;
                 dynamic value = "";
 
@@ -118,7 +224,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static Boolean SetSelectedIndexThreadSafe(this DataGridView dataGridView, int index, Boolean focusScrollBarToo = true)
+        public static Boolean setSelectedRowThreadSafes(this DataGridView dataGridView, int index, Boolean focusScrollBarToo = true)
         {
             try
             {
@@ -148,7 +254,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static int GetRowCountThreadSafe(this DataGridView dataGridView)
+        public static int getRowCountThreadSafe(this DataGridView dataGridView)
         {
             try
             {
@@ -175,7 +281,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static void ClearSelectionThreadSafe(this DataGridView dataGridView)
+        public static void clearSelectionThreadSafe(this DataGridView dataGridView)
         {
             try
             {
@@ -197,7 +303,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static void RefreshFromAnotherThread(this DataGridView dataGridView)
+        public static void refreshFromAnotherThread(this DataGridView dataGridView)
         {
             if (Thread.CurrentThread.IsBackground)
             {
@@ -263,7 +369,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static void SetFirstDesplayedScrollingRowIndexThreadSafe(this DataGridView dataGridView, int index)
+        public static void setFirstDesplayedScrollingRowIndexThreadSafe(this DataGridView dataGridView, int index)
         {
             if (Thread.CurrentThread.IsBackground)
             {
