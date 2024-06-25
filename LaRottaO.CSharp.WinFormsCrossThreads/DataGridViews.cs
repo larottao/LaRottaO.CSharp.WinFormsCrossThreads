@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -22,7 +23,7 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
-        public static int GetSelectedIndexThreadSafe(this DataGridView dataGridView)
+        public static int GetFirstSelectedRowThreadSafe(this DataGridView dataGridView)
         {
             try
             {
@@ -54,11 +55,43 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
             }
         }
 
+        public static List<int> GetSelectedRowsIndicesThreadSafe(this DataGridView dataGridView)
+        {
+            try
+            {
+                List<int> indices = new List<int>();
+
+                if (Thread.CurrentThread.IsBackground)
+                {
+                    dataGridView.Invoke(new Action(() =>
+                    {
+                        foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                        {
+                            indices.Add(row.Index);
+                        }
+                    }));
+                }
+                else
+                {
+                    foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                    {
+                        indices.Add(row.Index);
+                    }
+                }
+
+                return indices;
+            }
+            catch
+            {
+                return new List<int>();
+            }
+        }
+
         public static Tuple<Boolean, dynamic> getValueByColHeaderThreadSafe(this DataGridView dataGridView, string HeaderText)
         {
             try
             {
-                int selectedRow = GetSelectedIndexThreadSafe(dataGridView);
+                int selectedRow = GetFirstSelectedRowThreadSafe(dataGridView);
                 DataGridViewCellCollection dataGridViewCellCollection;
                 dynamic value = "";
 
