@@ -28,6 +28,11 @@ namespace LaRottaO.CSharp.WinFormsCrossThreads
         {
             try
             {
+                if (index < 0)
+                {
+                    return false;
+                }
+
                 if (Thread.CurrentThread.IsBackground)
                 {
                     dataGridView.Invoke(new Action(() =>
